@@ -18,8 +18,8 @@ namespace Fiap.Exemplo01.MVC.Web.Models
         [Display(Name = "Data de Nascimento")]    
         public DateTime DataNascimento { get; set; }
 
-        
         [Display(Name = "Estado Civil")]        
         public string EstadoCivil { get; set; }    
+
     }
 }

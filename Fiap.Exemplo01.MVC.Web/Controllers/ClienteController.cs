@@ -11,7 +11,6 @@ namespace Fiap.Exemplo01.MVC.Web.Controllers
     {
         private static List<Cliente> _lista = new List<Cliente>();
 
-
         // Abrir a tela
         [HttpGet]
         public ActionResult Cadastrar()

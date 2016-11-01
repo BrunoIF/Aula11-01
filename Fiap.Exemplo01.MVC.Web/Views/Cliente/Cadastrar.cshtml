@@ -6,6 +6,7 @@
 
 @Helper.Message(TempData["msg"] as string)
 
+
 @using (Html.BeginForm())
 {
     <div class="form-group">
@@ -33,6 +34,7 @@
     </div>
 
     <div class="form-group">
+
         @Html.LabelFor(cli => cli.EstadoCivil) <br />
         @Html.DropDownListFor(cli => cli.EstadoCivil,
 ViewBag.EstadoCivil as SelectList, "Selecione", new { @class = "form-group" })
@@ -48,3 +50,4 @@ ViewBag.EstadoCivil as SelectList, "Selecione", new { @class = "form-group" })
 {
     <!--<script........></script........>-->
 }
+
