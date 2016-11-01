@@ -1,0 +1,13 @@
+﻿@helper Submit(string nome, string classe) {
+    <input type="submit" value="@nome" class="@classe" />
+}
+
+@helper Message(object mensagem, string classe)
+{
+if (mensagem != null)
+{
+        <div class="@classe">
+            @mensagem
+        </div>
+}
+}
