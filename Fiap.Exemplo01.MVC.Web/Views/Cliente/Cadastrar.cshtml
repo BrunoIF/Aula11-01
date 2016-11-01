@@ -1,0 +1,55 @@
+﻿@model Fiap.Exemplo01.MVC.Web.Models.Cliente
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h2>Cadastro de Cliente</h2>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.Nome)
+        @Html.TextBoxFor(cli => cli.Nome, new { @placeholder = "Tataia", @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.Idade)
+        @Html.TextBoxFor(cli => cli.Idade, new { @placeholder = "16", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.Credito)
+        @Html.TextBoxFor(cli => cli.Credito, new { @placeholder = "9999", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.DataNascimento)
+        @Html.TextBoxFor(cli => cli.DataNascimento, new { @class = "form-control", @type= "date" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.NecessidadesEspeciais)<br/>
+        Sim: @Html.RadioButtonFor(cli => cli.NecessidadesEspeciais, true)
+        Não: @Html.RadioButtonFor(cli => cli.NecessidadesEspeciais, false)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(cli => cli.EstadoCivil) <br />
+        @Html.DropDownListFor(cli => cli.EstadoCivil,
+ViewBag.EstadoCivil as SelectList)
+    </div>
+
+
+
+
+   <div class="form-group">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </div>
+}
