@@ -36,12 +36,12 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 
         public void Remover(int id)
         {
-            Aluno aluno = _context.Aluno.Find(id);
+            var aluno = BuscarPorId(id);
             _context.Aluno.Remove(aluno);
         }
         public void Atualizar(Aluno aluno)
         {
-            _context.Entry(aluno).State = EntityState.Modified;
+            _context.Entry(aluno).State = EntityState.Modified;            
         }
         public ICollection<Aluno>
         BuscarPor(Expression<Func<Aluno, bool>> filtro)

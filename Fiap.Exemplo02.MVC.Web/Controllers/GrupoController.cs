@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Fiap.Exemplo02.MVC.Web.Models;
+using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 
 namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
     public class GrupoController : Controller
     {
-        private PortalContext _context = new PortalContext();
+        //private PortalContext _context = new PortalContext();
+        private UnitOfWork _unit = new UnitOfWork();
         // GET: Grupo
         [HttpGet]
         public ActionResult Cadastrar()
@@ -20,8 +22,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Grupo grupo)
         {
-            _context.Grupo.Add(grupo);
-            _context.SaveChanges();
+            _unit.GrupoRepository.Cadastrar(grupo);
+            _unit.Salvar();
 
             TempData["msg"] = "Grupo cadastrado com sucesso";
             return RedirectToAction("Cadastrar");
@@ -29,9 +31,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
         [HttpGet]
         public ActionResult Listar()
-        {
-            var lista = _context.Grupo.ToList();
-            return View(lista);
+        {            
+            return View(_unit.GrupoRepository.Listar());
         }
     }
 }
