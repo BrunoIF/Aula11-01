@@ -10,6 +10,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
     public class AlunoController : Controller
     {
         private PortalContext _context = new PortalContext();
+
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar()
@@ -36,7 +37,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Listar()
         {
-            var lista = _context.Aluno.ToList();
+            // Include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
+            var lista = _context.Aluno.Include("Grupo").ToList();
             return View(lista);
         }
 
@@ -46,6 +48,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             // Buscar o objeto (aluno) no banco 
             var aluno = _context.Aluno.Find(id);
 
+            var lista = _context.Grupo.ToList();
+            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
             //manda o aluno para a view
             return View(aluno);
         }
