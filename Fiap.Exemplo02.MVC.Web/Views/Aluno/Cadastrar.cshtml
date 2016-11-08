@@ -1,0 +1,38 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Aluno
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<br />
+
+<h2>Cadastro de Aluno</h2>
+
+@Helper.Message(TempData["msg"], "alert alert-success")
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(a => a.Nome)
+        @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.DataNascimento)
+        @Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.Bolsa)
+        @Html.CheckBoxFor(a => a.Bolsa)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.Desconto)
+        @Html.TextBoxFor(a => a.Desconto, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Helper.Submit("Salvar", "btn btn-success")
+    </div>
+}

@@ -1,0 +1,45 @@
+﻿@model ICollection<Fiap.Exemplo02.MVC.Web.Models.Grupo>
+
+@{
+    ViewBag.Title = "Listar";
+}
+
+<br />
+<h2>Listar</h2>
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Nota</th>
+            <th>Projeto Nome</th>
+            <th>Descrição</th>
+            <th>Data Início</th>
+            <th>Data Término</th>
+            <th>Entregue</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Nota</td>
+                <td>@item.Projeto.Nome</td>
+                <td>@item.Projeto.Descricao</td>
+                <td>@item.Projeto.DataInicio</td>
+                <td>@item.Projeto.DataTermino</td>
+                @if (@item.Projeto.Entregue == true)
+                {
+                    <td>Sim</td>
+                }
+                else
+                {
+                    <td>Não</td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

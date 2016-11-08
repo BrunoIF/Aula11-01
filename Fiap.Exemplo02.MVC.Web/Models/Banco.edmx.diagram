@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0967d2c000204abb85b5f64f4b5f484a" Name="Diagram1">
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Aluno" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Grupo" Width="1.5" PointX="3.375" PointY="1.25" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Projeto" Width="1.5" PointX="5.625" PointY="1" />
+        <AssociationConnector Association="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
