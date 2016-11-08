@@ -25,6 +25,7 @@
             <th>Data Nascimento</th>
             <th>Bolsa</th>
             <th>Desconto</th>
+            <th>Grupo</th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +37,7 @@
                 <td>@item.DataNascimento</td>
                 <td>@item.Bolsa</td>
                 <td>@item.Desconto</td>
+                <td>@item.Grupo.Nome (@item.Grupo.Id)</td>
                 <td>
                     @Html.ActionLink("Editar", "Editar", new { id = @item.Id }, new { @class = "btn btn-success btn-xs " })
                     <!-- Button trigger modal -->

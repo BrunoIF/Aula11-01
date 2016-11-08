@@ -14,6 +14,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
+            // Buscar todos os grupos cadastrados
+            var lista = _context.Grupo.ToList();
+            ViewBag.grupos = new SelectList(lista, "Id" , "Nome");
+
             return View();
         }
 
