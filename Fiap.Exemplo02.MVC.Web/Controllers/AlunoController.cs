@@ -14,6 +14,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         // private PortalContext _context = new PortalContext();
         private UnitOfWork _unit = new UnitOfWork();
 
+        #region GET
+
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar()
@@ -25,18 +27,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Cadastrar(Aluno aluno)
-        {
-            _unit.AlunoRepository.Cadastrar(aluno);
-            _unit.Salvar();
-
-            TempData["msg"] = "Aluno cadastrado com sucesso"; 
-            return RedirectToAction("Cadastrar");
-
-            //excluir e editar
-        }
-
         [HttpGet]
         public ActionResult Listar()
         {
@@ -44,7 +34,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //var lista = _context.Aluno.Include("Grupo").ToList();
             _unit.AlunoRepository.Listar();
             //enviar para a tela os grupos para o "select"
-            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+            CarregarComboGrupos();
             return View(_unit.AlunoRepository.Listar());
         }
 
@@ -52,32 +42,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Editar(int id)
         {
             // Buscar o objeto (aluno) no banco 
-            _unit.AlunoRepository.BuscarPorId(id);
-
-            ViewBag.grupos = new SelectList(_unit.AlunoRepository.Listar(), "Id", "Nome");
+            var aluno = _unit.AlunoRepository.BuscarPorId(id);
             //manda o aluno para a view
-            return View(_unit.AlunoRepository.Listar());
-        }
-
-        [HttpPost]
-        public ActionResult Editar(Aluno aluno)
-        {
-            _unit.AlunoRepository.Atualizar(aluno);
-            _unit.Salvar();
-            TempData["msg"] = "Aluno atualizado";
-
-            return RedirectToAction("Listar");
-        }
-
-        public ActionResult Excluir(int alunoId)
-        {
-            _unit.AlunoRepository.BuscarPorId(alunoId);
-            _unit.AlunoRepository.Remover(alunoId);
-            _unit.Salvar();
-
-            TempData["msg"] = "Aluno excluido";
-
-            return RedirectToAction("Listar");
+            CarregarComboGrupos();
+            return View(aluno);
         }
 
         [HttpGet]
@@ -93,15 +61,62 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             {
                 lista = _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca) && a.GrupoId == idGrupo);
             }
-
+            CarregarComboGrupos();
             // Retorna para a view com a lista
             return View("Listar", lista);
         }
 
+        #endregion
+
+        #region POST
+        [HttpPost]
+        public ActionResult Cadastrar(Aluno aluno)
+        {
+            _unit.AlunoRepository.Cadastrar(aluno);
+            _unit.Salvar();
+
+            TempData["msg"] = "Aluno cadastrado com sucesso"; 
+            return RedirectToAction("Cadastrar");
+
+            //excluir e editar
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Aluno aluno)
+        {
+            _unit.AlunoRepository.Atualizar(aluno);
+            _unit.Salvar();
+            TempData["msg"] = "Aluno atualizado";
+
+            return RedirectToAction("Listar");
+        }
+
+        [HttpPost]
+        public ActionResult Excluir(int alunoId)
+        {
+            _unit.AlunoRepository.BuscarPorId(alunoId);
+            _unit.AlunoRepository.Remover(alunoId);
+            _unit.Salvar();
+
+            TempData["msg"] = "Aluno excluido";
+
+            return RedirectToAction("Listar");
+        }
+        #endregion
+
+        #region PRIVATE
+        private void CarregarComboGrupos()
+        {
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+        }
+        #endregion
+
+        #region DISPOSE
         protected override void Dispose(bool disposing)
         {
             _unit.Dispose();
             base.Dispose(disposing);
         }
+        #endregion
     }
 }

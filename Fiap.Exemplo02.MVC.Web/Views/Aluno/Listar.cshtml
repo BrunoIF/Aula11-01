@@ -6,21 +6,26 @@
 
 <br />
 
-<h2>Listar</h2>
+<h2><i class="glyphicon glyphicon-list" style="font-size: 24px;"></i> Lista de Alunos</h2>
 
 @Helper.Message(TempData["msg"], "alert alert-success")
 
 @using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row">
-        <div class="col-md-3">
-            @Html.TextBox("nomeBusca", "", new { @class = " form-control", placeholder = "Digite um nome" })
-        </div>
-        <div class="col-md-2">            
-            @Html.DropDownList("idGrupo", ViewBag.grupos as SelectList, "Todos", new { @class = "form-control" })
-        </div>
-        <div class="col-md-1">
-            @Helper.Submit("Filtrar", "btn btn-primary")
+        <div class="col-md-6">
+
+            <div class="col-md-5">
+                @Html.TextBox("nomeBusca", "", new { @class = " form-control", placeholder = "Digite um nome" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.DropDownList("idGrupo", ViewBag.grupos as SelectList, "Todos", new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Helper.Submit("Filtrar", "btn btn-primary")
+            </div>
         </div>
     </div>
 }
@@ -44,19 +49,19 @@
             <tr>
                 <td>@item.Nome</td>
                 <td>@item.DataNascimento</td>
-                <td>@item.Bolsa</td>
-                <td>@item.Desconto</td>
-                <td>@item.Grupo.Nome (@item.Grupo.Id)</td>
+                <td>@(item.Bolsa ? "Sim" : "Não")</td>
+                <td>@item.Desconto %</td>
+                <td>@item.Grupo.Nome</td>
                 <td>
                     @Html.ActionLink("Editar", "Editar", new { id = @item.Id }, new { @class = "btn btn-info btn-xs " })
-
+                                        
                     <!-- Button trigger modal -->
                     <button onclick="alunoId.value = @item.Id" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">
-                       <span class="glyphicon glyphicon-trash"></span>
+                        <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>
-            }
+        }
     </tbody>
 </table>
 
