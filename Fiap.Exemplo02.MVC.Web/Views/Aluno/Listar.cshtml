@@ -36,7 +36,7 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Data Nascimento</th>
+            <th>Data de Nascimento</th>
             <th>Bolsa</th>
             <th>Desconto</th>
             <th>Grupo</th>
@@ -48,7 +48,7 @@
         {
             <tr>
                 <td>@item.Nome</td>
-                <td>@item.DataNascimento</td>
+                <td>@item.DataNascimento.ToString("dd/MM/yyyy")</td>
                 <td>@(item.Bolsa ? "Sim" : "Não")</td>
                 <td>@item.Desconto %</td>
                 <td>@item.Grupo.Nome</td>
