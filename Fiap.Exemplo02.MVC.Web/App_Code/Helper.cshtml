@@ -1,6 +1,6 @@
 ﻿@helper Submit(string name, string classe)
 {
-    <input type="submit" value="Salvar" class="btn btn-success" />
+    <input type="submit" value="@name" class="@classe" />
 }
 
 @helper Message(object mensagem, string classe)

@@ -19,7 +19,7 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         {
             get
             {
-                if (_alunoRepository != null)
+                if (_alunoRepository == null)
                 {
                     _alunoRepository = new AlunoRepository(_context);
                 }
@@ -34,7 +34,7 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         {
             get
             {
-                if (_grupoRepository != null)
+                if (_grupoRepository == null)
                 {
                     _grupoRepository = new GrupoRepository(_context);
                 }

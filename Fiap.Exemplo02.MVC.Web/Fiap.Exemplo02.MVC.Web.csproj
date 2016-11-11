@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlunoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +196,8 @@
     <Compile Include="Repositories\GrupoRepository.cs" />
     <Compile Include="Repositories\IAlunoRepository.cs" />
     <Compile Include="Repositories\IGrupoRepository.cs" />
+    <Compile Include="Repositories\IProfessorRepository.cs" />
+    <Compile Include="Repositories\ProfessorRepository.cs" />
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Professor\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

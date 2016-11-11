@@ -18,10 +18,11 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
-            // Buscar todos os grupos cadastrados                     
-            //ViewBag.grupos = new SelectList(lista, "Id" , "Nome");
+            // Buscar todos os grupos cadastrados         
+            var lista = _unit.GrupoRepository.Listar();
+            ViewBag.grupos = new SelectList(lista, "Id" , "Nome");
 
-            return View(_unit.GrupoRepository.Listar());
+            return View();
         }
 
         [HttpPost]
@@ -42,6 +43,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             // Include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
             //var lista = _context.Aluno.Include("Grupo").ToList();
             _unit.AlunoRepository.Listar();
+            //enviar para a tela os grupos para o "select"
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
             return View(_unit.AlunoRepository.Listar());
         }
 
@@ -78,13 +81,21 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Buscar(string nomeBusca)
+        public ActionResult Buscar(string nomeBusca, int? idGrupo)
         {
-            // Busca  o aluno por parte do nome
-            _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca));
+            ICollection<Aluno> lista;
+            if (idGrupo == null)
+            {
+                // Busca  o aluno por parte do nome
+                lista = _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca));
+            }
+            else
+            {
+                lista = _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca) && a.GrupoId == idGrupo);
+            }
 
             // Retorna para a view com a lista
-            return View("Listar", _unit.AlunoRepository.Listar());
+            return View("Listar", lista);
         }
 
         protected override void Dispose(bool disposing)
