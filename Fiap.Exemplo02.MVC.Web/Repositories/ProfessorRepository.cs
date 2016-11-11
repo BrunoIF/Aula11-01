@@ -9,9 +9,16 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
     public class ProfessorRepository : GenericRepository<Professor>, IProfessorRepository
     {
-        public void Promocao(double valor)
+        public ProfessorRepository(PortalContext context):base(context)
         {
-            
+
+        }
+
+        public void Promocao(decimal valor, int id)
+        {
+            var professor = BuscarPorId(id);
+            // Aumenta o valor em %
+            professor.Salario += professor.Salario * valor;   
         }
     }
 }
