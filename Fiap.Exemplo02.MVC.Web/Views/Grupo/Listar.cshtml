@@ -28,7 +28,7 @@
                 <td>@item.Nota</td>
                 <td>@item.Projeto.Nome</td>
                 <td>@item.Projeto.Descricao</td>
-                <td>@item.Projeto.DataInicio</td>
+                <td>@item.Projeto.DataInicio.ToString("dd/MM/yyyy")</td>
                 <td>@item.Projeto.DataTermino</td>
                 @if (@item.Projeto.Entregue == true)
                 {
