@@ -40,13 +40,13 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         }
 
         public ICollection<T> Listar()
-        {
-            return _dbset.ToList();
-        }
-
-        public void Remover(int id)
-        {
-            var entidade = _dbset.Find(id);
+        {                                  
+            return _dbset.ToList();        
+        }                                  
+                                           
+        public void Remover(int id)        
+        {                                  
+            var entidade = BuscarPorId(id);
             _dbset.Remove(entidade);
         }
     }

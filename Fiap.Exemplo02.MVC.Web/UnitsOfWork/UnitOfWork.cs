@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
 {
@@ -13,30 +14,46 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         private PortalContext _context = new PortalContext();
 
         // AlunoRepository
-        private IAlunoRepository _alunoRepository;
+        private IGenericRepository<Aluno> _alunoRepository;
 
-        public IAlunoRepository AlunoRepository
+        // GrupoRepository
+        private IGenericRepository<Grupo> _grupoRepository;
+
+        //Professor com GenericRepository
+        private IGenericRepository<Professor> _professorRepository;
+
+        public IGenericRepository<Professor> ProfessorRepository
+        {
+            get
+            {
+                if (_professorRepository == null)
+                {
+                    _professorRepository = new GenericRepository<Professor>(_context);
+                }
+                return _professorRepository;
+            }
+        }
+
+
+        public IGenericRepository<Aluno> AlunoRepository
         {
             get
             {
                 if (_alunoRepository == null)
                 {
-                    _alunoRepository = new AlunoRepository(_context);
+                    _alunoRepository = new GenericRepository<Aluno>(_context);
                 }
                 return _alunoRepository;
             }
         }
 
-        // GrupoRepository
-        private IGrupoRepository _grupoRepository;
-
-        public IGrupoRepository GrupoRepository
+        public IGenericRepository<Grupo> GrupoRepository
         {
             get
             {
                 if (_grupoRepository == null)
                 {
-                    _grupoRepository = new GrupoRepository(_context);
+                    _grupoRepository = new GenericRepository<Grupo>(_context);
                 }
                 return _grupoRepository;
             }
